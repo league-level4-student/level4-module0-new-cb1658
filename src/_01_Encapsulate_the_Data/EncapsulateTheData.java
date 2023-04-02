@@ -2,16 +2,20 @@ package _01_Encapsulate_the_Data;
 
 public class EncapsulateTheData {
 
-	// 1. Encapsulate all the members.
+	// 1. Encapsulate all the members. DONE
 
-	// 2. Implement the setter restrictions described above each member variable.
+	// 2. Implement the setter restrictions described above each member variable. DONE
 
+
+	
 	// 3. Pass all the JUnit tests.
 
 	/* 
 	 * All negative arguments should set itemsReceived to 0.
 	 */
 
+	
+	public void get
 	int itemsReceived;
 
 	/*
@@ -23,14 +27,36 @@ public class EncapsulateTheData {
 
 	double degreesTurned;
 
+	
+	public void setDegreesTurned(Double n) {
+		if(n>=0.0 && n <= 360.0) {
+			this.degreesTurned = n;
+		}
+		else {
+			if(n > 360) {
+				n = 360.0;
+			}
+			if(n<0) {
+				n = 0.0;
+			}
+		}
+	}
 	/*
 	 * nomenclature must not contain an empty String.
 	 * 
 	 * An empty String parameter should set nomenclature to a String with a single
 	 * space.
 	 */
+	public void setNomenclature(String n) {
+		if(!(n == "")) {
+			this.nomenclature = n;
+		}
+		else {
+			this.nomenclature = " ";
+		}
+	}
 
-	String nomenclature;
+	private String nomenclature;
 
 	/*
 	 * memberObj must not be a String.
@@ -47,7 +73,12 @@ public class EncapsulateTheData {
 	 * 
 	 * System.out.println(rob instanceof Random); //prints false
 	 */
+	public void setMemberObj(Object n) {
+		if(!(n instanceof String)) {
+			this.memberObj = n;
+		}
+	}
 
-	Object memberObj;
+	private Object memberObj;
 
 }
