@@ -1,6 +1,7 @@
 package _04_Snake;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,11 +16,42 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 public class SnakeGame implements ActionListener, KeyListener {
 
+	
+	
+	public class Location{
+		private int x;
+		private int y; 
+		
+		
+		public Location(int x, int y) {
+			this.x = x;
+			this.y = y; 
+		}
+		public int getX() {
+			return this.x;
+		}
+		public int getY() {
+			return this.y;
+		}
+		private boolean equals(int x, int y) {
+			if(this.x == x && this.y == y) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+	
+	enum Direction{
+		UP, DOWN, LEFT, RIGHT;
+	}
 	/*
 	 * BEFORE YOU START
-	 * 
+	 
 	 * 1. Create a Location class with a x and y member variables encapsulated.
 	 * 
 	 * 2. Create an equals method in Location that takes in a Location and returns
@@ -116,6 +148,12 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * 
 		 * Hint: KeyEvent.VK_UP.
 		 */
+		
+		switch(e.getKeyCode()) {
+		
+		case KeyEvent.VK_UP:
+			
+		}
 
 	}
 

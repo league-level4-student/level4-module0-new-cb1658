@@ -84,7 +84,7 @@ public class IntroToSwitchStatements {
 		// Note: Don't forget to add breaks after each case to avoid fall through.
 
 		// 5. Run the code to make sure the if-else and switch match for each value.
-		CHARLIE:
+	
 			
 			
 			
@@ -93,7 +93,7 @@ public class IntroToSwitchStatements {
 		
 		case "red":
 			System.out.println("red from switch");
-		    goto CHARLIE;
+
 		break;
 		
 		case "blue":

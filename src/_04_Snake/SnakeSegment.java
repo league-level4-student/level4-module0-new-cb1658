@@ -2,6 +2,8 @@ package _04_Snake;
 
 import java.awt.Graphics;
 
+import _04_Snake.SnakeGame.Location;
+
 public class SnakeSegment {
     private Location location;
     private int size;

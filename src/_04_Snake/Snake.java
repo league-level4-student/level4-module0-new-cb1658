@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import _04_Snake.SnakeGame.Direction;
+import _04_Snake.SnakeGame.Location;
+
 public class Snake {
 	public static final Color SNAKE_COLOR = Color.BLUE;
 	public static final int BODY_SIZE = 50;
