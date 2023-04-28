@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import _04_Snake.SnakeGame.Direction;
-import _04_Snake.SnakeGame.Location;
+import _04_Snake.Location;
 
 public class Snake {
 	public static final Color SNAKE_COLOR = Color.BLUE;
 	public static final int BODY_SIZE = 50;
 
 	private SnakeSegment head;
-	private ArrayList<SnakeSegment> snake;
+	private static ArrayList<SnakeSegment> snake;
 
 	private Direction currentDirection;
 
@@ -40,13 +40,39 @@ public class Snake {
 		 * Create variables for the next X and Y location of the snake's head.
 		 * Initialize them to the current X and Y locations.
 		 */
+		
+		
+		int X = head.getLocation().getX();
+		int Y = head.getLocation().getY();
 
 		/*
 		 * Use a switch statement to check on the currentDirection of the snake and
 		 * calculate the head's next x and y position. Depending on the direction, the
 		 * variables you created may increase or decrease by 1.
 		 */
-
+		
+		Direction d = null;
+		
+		switch(d) {
+		
+		case UP:
+			Y += 1; 
+			break;
+		
+		case DOWN:
+			Y -= 1;
+			break;
+		
+		case RIGHT:
+			X += 1;
+			break; 
+			
+		case LEFT:
+			X -= 1; 
+			break;
+		}
+		
+		
 		/*
 		 * Change the Location of each SnakeSegment in your snake ArrayList to the
 		 * Location of the segment in front of it.
@@ -54,14 +80,24 @@ public class Snake {
 		 * Use a loop starting at the end of the ArrayList and stop before the head of
 		 * the snake (index 0) or you will go out of bounds.
 		 */
+		
+		for(int i = snake.size(); i > 0; i--) {
+			
+			snake.get(i).setLocation(snake.get(i-1).getLocation());
+		}
 
 		/*
 		 * Create a new Location object and initialize it with the values calculated in
 		 * the first step. Then set the head's location equal to the new location.
 		 */
 
+		Location a = new Location(X,Y);
+		head.setLocation(a);
+		
+		
 		// Set the canMove member variable to true.
 
+		canMove = true;
 	}
 
 	public void setDirection(Direction direction) {
@@ -73,6 +109,10 @@ public class Snake {
 		 * 
 		 * Hint: Use the isNotOppositeDirection method.
 		 */
+		
+		if(isNotOppositeDirection(direction)) {
+			currentDirection = direction;
+		}
 
 	}
 
@@ -86,17 +126,38 @@ public class Snake {
 		 * this method should return false.
 		 */
 
-		return true;
+		if(direction == Direction.UP && currentDirection == Direction.DOWN) {
+			return false; 
+		}
+		
+		else if(direction == Direction.DOWN && currentDirection == Direction.UP) {
+			return false; 
+		}
+		
+		else if(direction == Direction.LEFT && currentDirection == Direction.RIGHT) {
+			return false; 
+		}
+		
+		else if(direction == Direction.RIGHT && currentDirection == Direction.LEFT) {
+			return false; 
+		}
+		
+		else {
+			return true;
+		}
 	}
 
 	public void resetLocation() {
 
 		// Clear the snake.
 
+		snake.clear();
 		/*
 		 * Create a new Location object for the head at SnakeGame.WIDTH / 2,
 		 * SnakeGame.HEIGHT / 2.
 		 */
+
+		Location b = new Location(SnakeGame.WIDTH/2, SnakeGame.HEIGHT/2);
 
 		/*
 		 * Set the head member variable equal to a new SnakeSegment object. Use the
@@ -104,8 +165,10 @@ public class Snake {
 		 * the size.
 		 */
 
+		head = new SnakeSegment(b,BODY_SIZE);
 		// Add the head to the snake.
 
+		snake.add(head);
 	}
 
 	public boolean isOutOfBounds() {
