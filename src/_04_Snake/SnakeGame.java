@@ -54,14 +54,17 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	private Timer timer;
 
-	private Location foodLocation;
-
+	private Location foodLocation = new Location(new Random().nextInt(WIDTH), new Random().nextInt(HEIGHT));
+	
+	
 	public SnakeGame() {
 		snake = new Snake(new Location(WIDTH / 2, HEIGHT / 2));
-
+	
 		window = new JFrame("Snake");
 		panel = new JPanel() {
 			private static final long serialVersionUID = 1L;
+			
+
 
 			@Override
 			public void paintComponent(Graphics g) {
@@ -71,6 +74,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 				g2.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 				g2.setColor(FOOD_COLOR);
+				
 				g2.drawOval(foodLocation.getX() * WINDOW_SCALE, foodLocation.getY() * WINDOW_SCALE, Snake.BODY_SIZE,
 						Snake.BODY_SIZE);
 				snake.draw(g);
@@ -87,7 +91,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 
-		randomizeFoodLocation();
+		//randomizeFoodLocation();
 
 		startGame();
 	}
@@ -160,7 +164,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		
 		Location rand_loc = new Location(rand_x , rand_y); 
 							
-		if(snake.isLocationOnSnake(rand_loc)) {
+		if(!snake.isLocationOnSnake(rand_loc)) {
 			foodLocation = rand_loc;
 		}
 		
@@ -208,7 +212,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 		// Call the snake's update method.
 
 		snake.update();
@@ -217,6 +221,8 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * gameOver method.
 		 */
 
+		
+		
 		if(snake.isHeadCollidingWithBody() || snake.isOutOfBounds()) {
 			gameOver();
 		}
@@ -225,9 +231,10 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * If the location of the snake's head is equal to the location of the food,
 		 * feed the snake and randomize the food location.
 		 */
-		if(snake.isLocationOnSnake(foodLocation)) {
+		if(snake.getHeadLocation().equals(foodLocation.getX(), foodLocation.getY())) {
 			snake.feed();
 			randomizeFoodLocation();
+			System.out.println("fed");
 		}
 
 		panel.repaint();

@@ -2,6 +2,7 @@ package _04_Snake;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -51,16 +52,16 @@ public class Snake {
 		 * variables you created may increase or decrease by 1.
 		 */
 		
-		Direction d = null;
+		Direction d = currentDirection;
 		
 		switch(d) {
 		
 		case UP:
-			Y += 1; 
+			Y -= 1; 
 			break;
 		
 		case DOWN:
-			Y -= 1;
+			Y += 1;
 			break;
 		
 		case RIGHT:
@@ -81,7 +82,9 @@ public class Snake {
 		 * the snake (index 0) or you will go out of bounds.
 		 */
 		
-		for(int i = snake.size(); i > 0; i--) {
+		for(int i = snake.size()-1; i > 0; i--) {
+			
+			//snake.get(i-1).setLocation(snake.get(i-1).getLocation());
 			
 			snake.get(i).setLocation(snake.get(i-1).getLocation());
 		}
@@ -177,8 +180,14 @@ public class Snake {
 		 * Complete the method so it returns true if the head of the snake is outside of
 		 * the window and false otherwise.
 		 */
-
-		return false;
+		
+		if(head.getLocation().getX() > SnakeGame.WIDTH || head.getLocation().getX() < 0
+		|| head.getLocation().getY() > SnakeGame.HEIGHT || head.getLocation().getY() < 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isHeadCollidingWithBody() {
@@ -188,7 +197,14 @@ public class Snake {
 		 * location as any other body segment.
 		 */
 
+		for(int i = 1; i < snake.size(); i++) {
+			if(head.getLocation().equals(snake.get(i).getLocation().getX(), snake.get(i).getLocation().getY())) {
+				return true;
+			}
+		}
+		
 		return false;
+		
 	}
 
 	public boolean isLocationOnSnake(Location loc) {
@@ -197,6 +213,13 @@ public class Snake {
 		 * Complete the method so it returns true if the passed in location is located
 		 * on the snake.
 		 */
+		
+		for(int i = 0; i < snake.size(); i++) {
+			if(loc.equals(snake.get(i).getLocation().getX(), snake.get(i).getLocation().getY())) {
+				return true;
+			}
+		}
+		
 
 		return false;
 	}

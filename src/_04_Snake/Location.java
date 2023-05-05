@@ -15,7 +15,7 @@ public class Location{
 	public int getY() {
 		return this.y;
 	}
-	private boolean equals(int x, int y) {
+	public boolean equals(int x, int y) {
 		if(this.x == x && this.y == y) {
 			return true;
 		}
