@@ -19,9 +19,6 @@ import javax.swing.Timer;
 
 
 public class SnakeGame implements ActionListener, KeyListener {
-
-	
-	
 	
 	
 	enum Direction{
@@ -84,14 +81,14 @@ public class SnakeGame implements ActionListener, KeyListener {
 		panel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		window.add(panel);
 
-		timer = new Timer(0, this);
+		timer = new Timer(250, this);
 
 		window.pack();
 		window.addKeyListener(this);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 
-		//randomizeFoodLocation();
+		randomizeFoodLocation();
 
 		startGame();
 	}
@@ -201,7 +198,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		if(a.equals("y")) {
 			snake.resetLocation(); 
 			randomizeFoodLocation();
-			timer = new Timer(0,this);
+			timer = new Timer(250,this);
 			timer.start();
 		}
 		else {

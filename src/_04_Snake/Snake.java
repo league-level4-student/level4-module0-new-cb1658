@@ -113,8 +113,9 @@ public class Snake {
 		 * Hint: Use the isNotOppositeDirection method.
 		 */
 		
-		if(isNotOppositeDirection(direction)) {
+		if(isNotOppositeDirection(direction) && canMove) {
 			currentDirection = direction;
+			canMove = false;
 		}
 
 	}
